@@ -4,7 +4,6 @@ import array
 import hashlib
 import json
 from pathlib import Path
-import shutil
 import subprocess
 import tempfile
 import wave
@@ -26,6 +25,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--exe', type=Path, required=True)
     parser.add_argument('--rom', type=Path, required=True)
+    parser.add_argument('--scenarios', nargs='+', choices=('enabled', 'zero-volume', 'missing-track', 'disabled'),
+                        default=['enabled', 'zero-volume', 'missing-track', 'disabled'])
     args = parser.parse_args()
     exe, rom = args.exe.resolve(), args.rom.resolve()
     expected = json.loads((exe.parent / 'package-manifest.json').read_text())['executable_sha256']
@@ -36,13 +37,12 @@ def main():
     profile = Path(tempfile.mkdtemp(prefix='validation-', dir=root))
     mods = profile / 'mods'
     mods.mkdir()
-    with zipfile.ZipFile(ROOT / 'dist/media-mods/WaveRace-Remixed-Music-Windows-x64.zip') as archive:
+    with zipfile.ZipFile(ROOT / 'dist/media-mods/RaceWave46Mods-v1.0.0.zip') as archive:
         archive.extractall(mods)
-    shutil.copy2(ROOT / 'dist/media-mods/WaveRace-HD-Textures.rtz', mods)
     config = profile / 'mod_config'
     config.mkdir()
     results = dict(executable_sha256=before, profile=str(profile), scenarios={})
-    for scenario in ('enabled', 'zero-volume', 'missing-track', 'disabled'):
+    for scenario in args.scenarios:
         enabled = [] if scenario == 'disabled' else ['racewave_hd_textures', 'racewave_remixed_music']
         (profile / 'mods.json').write_text(json.dumps(dict(enabled_mods=enabled,
                         mod_order=['racewave_hd_textures', 'racewave_remixed_music'], latest_game_mode='')))

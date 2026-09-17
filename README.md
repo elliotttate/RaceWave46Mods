@@ -4,11 +4,9 @@ HD textures and a remixed soundtrack for **[RaceWave46](https://github.com/Domaz
 
 ## Downloads
 
-| Download | Includes |
-| --- | --- |
-| **[HD texture pack](https://github.com/elliotttate/RaceWave46Mods/releases/latest/download/WaveRace-HD-Textures.rtz)** | 1,806 replacement images, 1,828 texture mappings and mipmaps |
-| **[Remixed music — Windows x64](https://github.com/elliotttate/RaceWave46Mods/releases/latest/download/WaveRace-Remixed-Music-Windows-x64.zip)** | Nine recordings, loop settings, native audio mod and credits |
-| [SHA-256 checksums](https://github.com/elliotttate/RaceWave46Mods/releases/latest/download/SHA256SUMS.txt) | Verify the downloaded packs |
+**[Download RaceWave46Mods v1.0.0 — Windows x64](https://github.com/elliotttate/RaceWave46Mods/releases/latest/download/RaceWave46Mods-v1.0.0.zip)**
+
+One ZIP includes the HD texture pack (1,806 images and 1,828 mappings), nine music recordings, the music mod, installation guide, credits and checksums. Both mods can be used independently.
 
 [All releases](https://github.com/elliotttate/RaceWave46Mods/releases) · [Recomp repository](https://github.com/DomazinUS/RaceWave46) · [Download the recomp](https://github.com/DomazinUS/RaceWave46/releases/tag/v1.0.0) · [Asset source project](https://github.com/elliotttate/wave-race-64-recomp)
 
@@ -16,10 +14,10 @@ You need the recomp installed and your own supported **Wave Race 64 USA Rev 1** 
 
 ## Installation
 
-1. Close the game. Open its `.runtime/mods` folder beside `WaveRace64Recompiled.exe`. Create `mods` if needed.
-2. Copy **WaveRace-HD-Textures.rtz** into `mods`. **Leave the RTZ intact.** You can also import it through **Settings → Mods**.
-3. Extract **WaveRace-Remixed-Music-Windows-x64.zip** directly into `mods`. Keep `racewave_music.dll` next to the `racewave_music` folder. **Do not add an extra enclosing folder.** The music ZIP must be extracted; importing only an individual file through the game UI will not install the full music mod.
-4. Open the game and go to **Settings → Mods**. Enable **Wave Race HD Textures** and/or **Wave Race Remixed Music**, then start playing. Restart the game after enabling or disabling music.
+1. Download **RaceWave46Mods-v1.0.0.zip** above and extract it to a temporary folder.
+2. **Textures:** open the frontend, go to **Mods → Install Mods**, choose the extracted **WaveRace-HD-Textures.rtz**, and press **OK**. Leave this RTZ intact; it is already packaged for the importer. Enable **Wave Race HD Textures** in the Mods tab.
+3. **Music:** close the game, then copy the extracted `racewave_music.dll` and `racewave_music` folder together into `.runtime/mods` beside `WaveRace64Recompiled.exe`. Create `mods` if needed. Open the game and enable **Wave Race Remixed Music**. The music DLL needs this manual step; the texture importer does not extract native music sidecars.
+4. Start the game. Restart after enabling or disabling music.
 
 ```text
 Your RaceWave46 installation/
@@ -38,6 +36,8 @@ Your RaceWave46 installation/
 ```
 
 If you use `--runtime-dir`, install into that directory's `mods` folder instead.
+
+**Already have an extracted texture pack?** Zip the contents of the folder containing `textures/`, `manifest.json` and `rt64.json`, then rename the ZIP extension to `.rtz`. Those entries must be at the archive root, without an extra enclosing folder. Install that RTZ through **Mods → Install Mods → OK**. The texture pack in this download is already prepared this way.
 
 ## Music controls
 

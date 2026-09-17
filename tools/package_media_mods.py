@@ -56,8 +56,29 @@ def main():
         with file.open('rb') as stream:
             hashes.append(f"{hashlib.file_digest(stream, 'sha256').hexdigest()}  {file.name}")
     (OUT / "SHA256SUMS.txt").write_text("\n".join(hashes) + "\n")
+    # One user-facing download: an intact RTZ for the frontend importer plus
+    # the directory music mod and its native sidecar. Avoid a nested music ZIP.
+    bundle = OUT / "RaceWave46Mods-v1.0.0.zip"
+    with zipfile.ZipFile(bundle, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
+        archive.write(texture, texture.name)
+        with zipfile.ZipFile(music) as music_archive:
+            for entry in music_archive.infolist():
+                archive.writestr(entry.filename, music_archive.read(entry))
+        archive.write(ROOT / "mods/VALIDATION.md", "VALIDATION.md")
+        # Checksums refer directly to installed payload files, not a nested ZIP.
+        payload_hashes = [hashes[0]]
+        with zipfile.ZipFile(music) as music_archive:
+            for entry in music_archive.infolist():
+                payload_hashes.append(f"{hashlib.sha256(music_archive.read(entry)).hexdigest()}  {entry.filename}")
+        archive.writestr("SHA256SUMS.txt", "\n".join(payload_hashes) + "\n")
+    with zipfile.ZipFile(bundle) as archive:
+        if archive.testzip() is not None:
+            raise ValueError(f"Corrupt archive: {bundle}")
+    with bundle.open('rb') as stream:
+        bundle_hash = hashlib.file_digest(stream, 'sha256').hexdigest()
+    (OUT / 'BUNDLE-SHA256.txt').write_text(f'{bundle_hash}  {bundle.name}\n')
     print(json.dumps(report, indent=2))
-    for file in (texture, music):
+    for file in (texture, music, bundle):
         print(f"{file}: {file.stat().st_size:,} bytes")
 
 

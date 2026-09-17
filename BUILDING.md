@@ -22,10 +22,10 @@ You may instead pass `-RecompSource C:\path\to\RaceWave46` to use an existing ch
 
 ## Restore media
 
-Download both mod packs from this repository's release, then run:
+Download the single mod bundle from this repository's release, then run:
 
 ```powershell
-python tools/restore_media.py --textures C:\Downloads\WaveRace-HD-Textures.rtz --music C:\Downloads\WaveRace-Remixed-Music-Windows-x64.zip
+python tools/restore_media.py --bundle C:\Downloads\RaceWave46Mods-v1.0.0.zip
 ```
 
 This restores only the manifest-listed media and verifies its hashes. Media stays excluded from Git. Existing source manifests and credits are preserved.
@@ -38,7 +38,7 @@ This restores only the manifest-listed media and verifies its hashes. Media stay
 .\BUILD-MODS.ps1 -UseWslCompiler
 ```
 
-The script builds the MIPS hooks, RecompModTool and native music DLL, runs seven automated mixer/bridge tests, validates the media, and writes the installable packs and checksums to `dist/media-mods`. The standalone test harness creates its own synthetic audio, so `-SkipPackaging` builds and tests without requiring media downloads. `-Jobs` controls build concurrency.
+The script builds the MIPS hooks, RecompModTool and native music DLL, runs seven automated mixer/bridge tests, validates the media, and writes the single release download `dist/media-mods/RaceWave46Mods-v1.0.0.zip`. Separate packs are retained there as build intermediates. The standalone test harness creates its own synthetic audio, so `-SkipPackaging` builds and tests without requiring media downloads. `-Jobs` controls build concurrency.
 
 To test against the original release with your own USA Rev 1 ROM:
 

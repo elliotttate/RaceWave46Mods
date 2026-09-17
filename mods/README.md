@@ -10,16 +10,21 @@ download its [original v1.0.0 release](https://github.com/DomazinUS/RaceWave46/r
 
 ## Install
 
-1. Close the game. Open `.runtime/mods` beside `WaveRace64Recompiled.exe`, creating
-   `mods` if needed. A custom `--runtime-dir` uses that directory's `mods` instead.
-2. Copy **WaveRace-HD-Textures.rtz** into `mods` as a file; do not extract it.
-   Alternatively import the RTZ with **Settings > Mods**.
-3. Extract **WaveRace-Remixed-Music-Windows-x64.zip** directly into `mods`. Keep
-   `racewave_music.dll` beside the `racewave_music` directory. The latter is a
-   standard directory mod containing its manifest, hooks and recordings. Use
-   extraction for this pack; the UI's file importer does not install sidecars.
+1. Download **RaceWave46Mods-v1.0.0.zip** and extract it to a temporary folder.
+2. Open the frontend, choose **Mods > Install Mods**, select the extracted
+   **WaveRace-HD-Textures.rtz**, and press **OK**. Do not extract the RTZ itself.
+3. Close the game. Copy `racewave_music.dll` and the `racewave_music` directory
+   together into `.runtime/mods` beside `WaveRace64Recompiled.exe`, creating `mods`
+   if needed. The latter is a standard directory mod containing its manifest,
+   hooks and recordings. The UI's texture importer does not install native music
+   sidecars. A custom `--runtime-dir` uses that directory's `mods` instead.
 4. Open **Settings > Mods**, enable **Wave Race HD Textures** and/or **Wave Race
    Remixed Music**, then start the game. Restart after toggling the music mod.
+
+For other extracted texture packs, zip the contents of the folder containing
+`textures/`, `manifest.json` and `rt64.json`, rename `.zip` to `.rtz`, then use
+**Mods > Install Mods > OK**. Keep those entries at the ZIP root with no extra
+enclosing folder. The supplied RTZ is already ready to import.
 
 Expected layout:
 

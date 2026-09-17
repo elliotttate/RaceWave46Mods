@@ -21,17 +21,27 @@ def restore(archive, archive_name, destination, expected_hash):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--textures', type=Path, required=True)
-    parser.add_argument('--music', type=Path, required=True)
+    parser.add_argument('--bundle', type=Path, help='The single RaceWave46Mods release ZIP')
+    parser.add_argument('--textures', type=Path, help='Legacy separate texture RTZ')
+    parser.add_argument('--music', type=Path, help='Legacy separate music ZIP')
     args = parser.parse_args()
+    if args.bundle:
+        import io
+        with zipfile.ZipFile(args.bundle) as archive:
+            texture_input = io.BytesIO(archive.read('WaveRace-HD-Textures.rtz'))
+        music_input = args.bundle
+    elif args.textures and args.music:
+        texture_input, music_input = args.textures, args.music
+    else:
+        parser.error('Provide --bundle, or both --textures and --music')
     texture_root = ROOT / 'assets/textures/nano-banana-2'
     texture_manifest = json.loads((texture_root / 'manifest.json').read_text())
-    with zipfile.ZipFile(args.textures) as archive:
+    with zipfile.ZipFile(texture_input) as archive:
         for entry in texture_manifest['files']:
             restore(archive, entry['path'], texture_root / entry['path'], entry['sha256'])
     music_root = ROOT / 'assets/music'
     music_manifest = json.loads((music_root / 'manifest.json').read_text())
-    with zipfile.ZipFile(args.music) as archive:
+    with zipfile.ZipFile(music_input) as archive:
         for track in music_manifest['tracks']:
             restore(archive, 'racewave_music/' + track['output'], music_root / track['output'], track['output_sha256'])
     print(json.dumps(bundled_assets.validate(ROOT / 'assets'), indent=2))
