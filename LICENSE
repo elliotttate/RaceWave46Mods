@@ -1,0 +1,14 @@
+Wave Race 64 Media Mods — license scope
+
+Original integration code is licensed under the GNU General Public License,
+version 3 only (SPDX-License-Identifier: GPL-3.0-only). The complete license is
+in COPYING. It is provided without warranty.
+
+The music mixer adapted from wave-race-64-recomp retains that project's MIT
+notice in assets/WAVE-RACE-64-RECOMP-LICENSE.txt. Original RaceWave46 code retains
+its GPL-3.0-only terms. See THIRD-PARTY-NOTICES.md for provenance.
+
+These code licenses do not cover music recordings, compositions, artwork,
+Nintendo game assets, logos or trademarks. They do not grant or assert media
+redistribution rights. Those materials retain their respective owners' rights.
+No game ROM or executable is included.

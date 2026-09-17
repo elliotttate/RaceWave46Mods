@@ -1,0 +1,32 @@
+[manifest]
+id = "racewave_remixed_music"
+version = "1.0.0"
+display_name = "Wave Race Remixed Music"
+description = "Replacement soundtrack by Bryan EL and Retro Game Remix. Preserves original effects, announcer, sequence scripts, fades and pauses. Windows x64; extract the entire ZIP into the mods directory. Restart the game after enabling or disabling. See included credits for media rights."
+short_description = "Nine remixed recordings, with loops and original sound effects."
+authors = ["Bryan EL (music)", "Retro Game Remix (music)", "RaceWave46 mod integration"]
+game_id = "waverace64"
+minimum_recomp_version = "1.0.0"
+
+[[manifest.native_libraries]]
+name = "racewave_music"
+funcs = ["rw_music_load_enter", "rw_music_load_return", "rw_music_disable", "rw_music_sound_enter", "rw_music_sound_return", "rw_music_tick", "rw_music_state"]
+
+[[manifest.config_options]]
+id = "volume"
+name = "Replacement music volume"
+description = "Balance the remixes against original effects and announcer. Main Volume still controls the final mix."
+type = "Number"
+min = 0
+max = 100
+step = 1
+precision = 0
+percent = true
+default = 65
+
+[inputs]
+elf_path = "../../build/mods/music/hooks.elf"
+mod_filename = "WaveRace-Remixed-Music"
+func_reference_syms_file = "../../symbols/waverace64.us.rev1.toml"
+data_reference_syms_files = []
+additional_files = ["../../assets/music/CREDITS.md", "../../assets/WAVE-RACE-64-RECOMP-LICENSE.txt"]

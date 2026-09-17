@@ -1,0 +1,11 @@
+* text=auto
+*.ps1 text eol=crlf
+*.md text eol=lf
+*.py text eol=lf
+*.cpp text eol=lf
+*.hpp text eol=lf
+*.c text eol=lf
+*.toml text eol=lf
+*.json text eol=lf
+# Preserve upstream license text, including its original whitespace.
+licenses/* -whitespace

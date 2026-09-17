@@ -1,0 +1,13 @@
+/build/
+/dist/
+/dependencies/
+/build-log.txt
+__pycache__/
+*.pyc
+/assets/music/*.wav
+/assets/textures/nano-banana-2/textures/
+/assets/textures/nano-banana-2/rt64/
+.runtime*/
+*.z64
+*.n64
+*.v64
